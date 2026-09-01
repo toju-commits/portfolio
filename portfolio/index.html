@@ -51,7 +51,7 @@
         SYSTEM ONLINE
       </div>
 
-      <button class="jai-cta" type="button">
+      <button class="jai-cta" type="button" aria-haspopup="dialog" aria-controls="jaiDrawer" aria-expanded="false">
         ASK ABOUT MY WORK →
       </button>
     </div>
@@ -269,6 +269,28 @@
     </div>
   </footer>
 
+</div>
+
+<div class="jai-drawer" id="jaiDrawer" aria-hidden="true">
+  <button class="jai-drawer-backdrop" type="button" aria-label="Close JAI panel" tabindex="-1"></button>
+  <aside class="jai-drawer-panel" role="dialog" aria-modal="true" aria-labelledby="jaiDrawerTitle" aria-describedby="jaiDrawerMessage">
+    <div class="jai-drawer-head">
+      <div>
+        <div class="jai-drawer-kicker"><span></span> Portfolio assistant</div>
+        <h2 id="jaiDrawerTitle">JAI</h2>
+      </div>
+      <button class="jai-drawer-close" type="button" aria-label="Close JAI panel">Close <span aria-hidden="true">×</span></button>
+    </div>
+    <div class="jai-drawer-body">
+      <div class="jai-drawer-status">System preview · 01</div>
+      <p id="jaiDrawerMessage">JAI is currently unavailable.</p>
+      <p class="jai-drawer-note">A guided way to explore my work, systems, and experience is coming soon.</p>
+    </div>
+    <div class="jai-drawer-foot">
+      <span>Joshua Iyonsi</span>
+      <span>MMXXVI</span>
+    </div>
+  </aside>
 </div>
 
 <script src="scripts/main.js"></script>

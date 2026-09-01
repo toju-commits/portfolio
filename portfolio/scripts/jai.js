@@ -214,3 +214,60 @@ function animate() {
 }
 
 animate();
+
+(function jaiDrawer() {
+  const trigger = document.querySelector('.jai-cta');
+  const drawer = document.getElementById('jaiDrawer');
+
+  if (!trigger || !drawer) return;
+
+  const panel = drawer.querySelector('.jai-drawer-panel');
+  const closeButton = drawer.querySelector('.jai-drawer-close');
+  const backdrop = drawer.querySelector('.jai-drawer-backdrop');
+  let lastFocusedElement = null;
+
+  function openDrawer() {
+    lastFocusedElement = document.activeElement;
+    drawer.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
+    trigger.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('jai-drawer-open');
+    closeButton.focus();
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    trigger.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('jai-drawer-open');
+
+    if (lastFocusedElement) lastFocusedElement.focus();
+  }
+
+  trigger.addEventListener('click', openDrawer);
+  closeButton.addEventListener('click', closeDrawer);
+  backdrop.addEventListener('click', closeDrawer);
+
+  document.addEventListener('keydown', (event) => {
+    if (!drawer.classList.contains('is-open')) return;
+
+    if (event.key === 'Escape') {
+      closeDrawer();
+      return;
+    }
+
+    if (event.key === 'Tab') {
+      const focusable = panel.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+})();
