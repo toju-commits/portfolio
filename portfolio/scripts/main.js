@@ -24,6 +24,45 @@
     });
   })();
 
+  (function copyEmail() {
+    var resetTimer;
+
+    function fallbackCopy(text) {
+      var input = document.createElement('textarea');
+      input.value = text;
+      input.setAttribute('readonly', '');
+      input.style.position = 'fixed';
+      input.style.opacity = '0';
+      document.body.appendChild(input);
+      input.select();
+      var copied = document.execCommand('copy');
+      input.remove();
+      return copied;
+    }
+
+    document.querySelectorAll('.copy-email').forEach(function(button) {
+      button.addEventListener('click', function() {
+        var email = button.dataset.email;
+        var copy = navigator.clipboard && window.isSecureContext
+          ? navigator.clipboard.writeText(email).then(function() { return true; }).catch(function() { return fallbackCopy(email); })
+          : Promise.resolve(fallbackCopy(email));
+
+        copy.then(function(copied) {
+          if (!copied) return;
+          document.querySelectorAll('.copy-email').forEach(function(item) {
+            item.classList.toggle('is-copied', item === button);
+            item.setAttribute('aria-label', item === button ? 'Email address copied' : 'Copy email address');
+          });
+          clearTimeout(resetTimer);
+          resetTimer = setTimeout(function() {
+            button.classList.remove('is-copied');
+            button.setAttribute('aria-label', 'Copy email address');
+          }, 1600);
+        });
+      });
+    });
+  })();
+
   (function ambientSpotlight() {
     var ambient = document.getElementById('ambient');
     var raf = null, mx = 50, my = 30;

@@ -88,42 +88,67 @@
     background: var(--signal-soft);
   }
 
-    /* copy email icon */
-    .copy-email {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+  .contact-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 22px;
+  }
 
-      width: 18px;
-      height: 18px;
-      margin-left: 6px;
-      padding: 0;
+  .copy-email {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    margin-left: 6px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--ink-soft);
+    opacity: 0.6;
+    vertical-align: middle;
+    transition: color 0.2s, opacity 0.2s;
+  }
 
-      border: 0;
-      background: transparent;
+  .copy-email svg {
+    width: 12px;
+    height: 12px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
 
-      color: var(--ink-soft);
-      opacity: 0.65;
+  .copy-email:hover,
+  .copy-email:focus-visible,
+  .copy-email.is-copied {
+    color: var(--signal);
+    opacity: 1;
+  }
 
-      cursor: none;
-      vertical-align: middle;
-    }
+  .copy-email::after {
+    content: "Copied";
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 3px);
+    transform: translate(-50%, 3px);
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--signal);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s, transform 0.15s;
+  }
 
-    .copy-email svg {
-      width: 12px;
-      height: 12px;
-
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .copy-email:hover {
-      color: var(--signal);
-      opacity: 1;
-    }
+  .copy-email.is-copied::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 
   @media (pointer: fine){
     a,
@@ -862,7 +887,11 @@
     margin-bottom: 2px;
   }
 
-  .footer-contact dd { font-size: 16px; }
+  .footer-contact dd {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+  }
 
   .footer-contact a {
     color: var(--ink);
@@ -901,6 +930,7 @@
       align-items: start;
     }
     .hero-meta { text-align: left; }
+    .contact-row { justify-content: flex-start; }
     .scroll-cue { display: none; }
 
     .section { padding: 80px 0; }
