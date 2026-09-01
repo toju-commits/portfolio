@@ -184,6 +184,15 @@ body.jai-drawer-open {
   box-shadow: 0 0 12px rgba(255, 180, 0, 0.5);
 }
 
+.jai-subtitle {
+  font-family: var(--mono);
+  font-size: 8px;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
 .jai-drawer-head h2 {
   font-family: var(--display);
   font-size: 54px;
@@ -277,7 +286,7 @@ body.jai-drawer-open {
   .jai-info {
     display: grid;
     grid-template-columns: 1fr auto;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto auto auto;
     align-items: center;
     column-gap: 16px;
     row-gap: 4px;
@@ -297,9 +306,18 @@ body.jai-drawer-open {
     font-size: 7px;
   }
 
+  .jai-subtitle {
+    grid-column: 1;
+    grid-row: 3;
+
+    font-size: 6px;
+    letter-spacing: 0.07em;
+    white-space: nowrap;
+  }
+
   .jai-cta {
     grid-column: 2;
-    grid-row: 1 / span 2;
+    grid-row: 1 / span 3;
 
     margin: 0;
 
