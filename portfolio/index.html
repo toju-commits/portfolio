@@ -196,7 +196,9 @@
     margin-bottom: 56px;
   }
 
-  .name .line { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+  .name .line { display: block; overflow: hidden;}
+
+  .name .line.reveal-complete {overflow: visible;}
 
   .name .ch {
     display: inline-block;
@@ -1147,6 +1149,13 @@
         span.className = 'ch' + (isSignal ? ' signal' : '');
         span.textContent = char === ' ' ? '\u00A0' : char;
         span.style.animationDelay = (totalDelay + i * 0.04) + 's';
+        
+        if (i === chars.length - 1){
+          span.addEventListener('animationend', function(){
+            line.classList.add('reveal-complete');
+          }, {once: true});
+        }
+        
         line.appendChild(span);
       });
       totalDelay += text.length * 0.04 + 0.1;
@@ -1175,13 +1184,15 @@
 
     window.addEventListener('mousemove', function(e) {
       mx = e.clientX; my = e.clientY;
-      dot.style.transform = 'translate(' + (mx - 2.5) + 'px, ' + (my - 2.5) + 'px)';
+      dot.style.left = mx + 'px';
+      dot.style.top = my + 'px';
     });
-
+    
     function tick() {
       rx += (mx - rx) * 0.18;
       ry += (my - ry) * 0.18;
-      ring.style.transform = 'translate(' + (rx - 16) + 'px, ' + (ry - 16) + 'px)';
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
       requestAnimationFrame(tick);
     }
     tick();
