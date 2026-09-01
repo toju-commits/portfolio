@@ -87,6 +87,44 @@
     border-color: var(--signal);
     background: var(--signal-soft);
   }
+
+    /* copy email icon */
+    .copy-email {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 18px;
+      height: 18px;
+      margin-left: 6px;
+      padding: 0;
+
+      border: 0;
+      background: transparent;
+
+      color: var(--ink-soft);
+      opacity: 0.65;
+
+      cursor: none;
+      vertical-align: middle;
+    }
+
+    .copy-email svg {
+      width: 12px;
+      height: 12px;
+
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .copy-email:hover {
+      color: var(--signal);
+      opacity: 1;
+    }
+
   @media (pointer: fine){
     a,
     button,
